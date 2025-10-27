@@ -1,6 +1,6 @@
 package com.agi.hack.enums;
 
-public enum equipmentList {
+public enum EquipmentList {
 
     LAPTOP,
     DESKTOP,
