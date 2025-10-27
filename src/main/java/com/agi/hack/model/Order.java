@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "orders")
-public class order {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,10 @@ public class order {
     @Enumerated(EnumType.STRING)
     private equipmentList Type;
 
-    public order() {
+    public Order() {
     }
 
-    public order(Long id, LocalDateTime orderDate, LocalDateTime expectedDate, equipmentList type) {
+    public Order(Long id, LocalDateTime orderDate, LocalDateTime expectedDate, equipmentList type) {
         this.id = id;
         this.orderDate = orderDate;
         this.expectedDate = expectedDate;
