@@ -1,4 +1,4 @@
-package com.agi.hack.DTO;
+package com.agi.hack.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
