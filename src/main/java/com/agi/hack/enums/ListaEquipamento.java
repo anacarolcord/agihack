@@ -1,15 +1,15 @@
 package com.agi.hack.enums;
 
-public enum EquipmentList {
+public enum ListaEquipamento {
 
-    LAPTOP,
+    NOTEBOOK,
     DESKTOP,
-    PRINTER,
-    ROUTER,
+    IMPRESSORA,
+    ROTEADOR,
     MONITOR,
     TABLET,
     MOUSE,
-    KEYBOARD,
+    TECLADO,
     HEADSET,
     WEBCAM
     
