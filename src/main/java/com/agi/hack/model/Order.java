@@ -2,7 +2,7 @@ package com.agi.hack.model;
 
 import java.time.LocalDateTime;
 
-import com.agi.hack.enums.equipmentList;
+import com.agi.hack.enums.EquipmentList;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -25,12 +25,12 @@ public class Order {
     private LocalDateTime expectedDate;
 
     @Enumerated(EnumType.STRING)
-    private equipmentList Type;
+    private EquipmentList Type;
 
     public Order() {
     }
 
-    public Order(Long id, LocalDateTime orderDate, LocalDateTime expectedDate, equipmentList type) {
+    public Order(Long id, LocalDateTime orderDate, LocalDateTime expectedDate, EquipmentList type) {
         this.id = id;
         this.orderDate = orderDate;
         this.expectedDate = expectedDate;
@@ -61,14 +61,12 @@ public class Order {
         this.expectedDate = expectedDate;
     }
 
-    public equipmentList getType() {
+    public EquipmentList getType() {
         return Type;
     }
 
-    public void setType(equipmentList type) {
+    public void setType(EquipmentList type) {
         Type = type;
     }
 
-    
-    
 }
