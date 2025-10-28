@@ -1,5 +1,6 @@
 package com.agi.hack.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.agi.hack.dto.PedidoDTO.PedidoRequestDTO;
@@ -24,6 +25,7 @@ public class PedidoService {
     public PedidoResponseDTO gerarPedido(PedidoRequestDTO dto) {
         Pedido pedido = pedidoMapper.toEntity(dto);
         pedido.setStatus(StatusPedido.PENDENTE);
+        pedido.setDataPedido(LocalDateTime.now());
         Pedido pedidoSalvo = pedidoRepository.save(pedido);
         return pedidoMapper.toResponseDTO(pedidoSalvo);
     }
