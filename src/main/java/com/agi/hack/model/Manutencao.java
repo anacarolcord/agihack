@@ -19,7 +19,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Manutencao {
 
-    //id, serialNumber, nome do equipamento, status, data de entrada, data prevista de saida, data saida
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,17 +39,23 @@ public class Manutencao {
    @Column(name = "data_entrada", nullable = false)
     private LocalDate dataEntrada;
 
-   @Column(name = "data_inicio", nullable = false)
+   @Column(name = "data_inicio", nullable = true)
     private LocalDate dataInicio;
 
-   @Column(name = "data_prevista", nullable = false)
+   @Column(name = "data_prevista", nullable = true)
     private LocalDate dataPrevista;
 
-   @Column(name = "data_entrega", nullable = false)
+   @Column(name = "data_entrega", nullable = true)
     private LocalDate dataEntrega;
 
    @ManyToOne
     @JoinColumn(name = "id_equipamento", nullable = false)
     private Equipamento equipamento;
+
+   @
+
+   @ManyToOne
+    @JoinColumn(name = "id_funcionario", nullable = false)
+    private Funcionario funcionario;
 
 }
