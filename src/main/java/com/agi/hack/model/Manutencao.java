@@ -1,31 +1,64 @@
 package com.agi.hack.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+import com.agi.hack.enums.ListaEquipamento;
+import com.agi.hack.enums.StatusManutencao;
+import jakarta.persistence.*;
+import lombok.*;
+
+import com.agi.hack.enums.ListaEquipamento;
+
+import java.time.LocalDate;
+
+
 @Entity
-@Table(name = "manutencoes") // Nome da tabela no banco
+@EqualsAndHashCode(of = {"idOrdemServico"})
+@ToString
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Manutencao {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_ordem_servico")
+    private Long idOrdemServico;
 
-    // Adicione campos reais de Manutenção aqui. Exemplo:
-    private String descricao;
-    // private LocalDate dataManutencao;
+    @Column(name = "numero_serial", nullable = false, unique = true, length = 50)
+    private String serialNumber;
 
-    // Se a manutenção for relacionada ao funcionário, adicione o relacionamento N:1 aqui:
-    // @ManyToOne
-    // @JoinColumn(name = "funcionario_id")
-    // private Funcionario funcionario;
+   @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_equipamento", nullable = false)
+    private ListaEquipamento tipoEquipamento;
+
+   @Enumerated(EnumType.STRING)
+    @Column(name = "status_manutencao", nullable = false)
+    private StatusManutencao statusManutencao;
+
+   @Column(name = "data_entrada", nullable = false)
+    private LocalDate dataEntrada;
+
+   @Column(name = "data_inicio", nullable = true)
+    private LocalDate dataInicio;
+
+   @Column(name = "data_prevista", nullable = true)
+    private LocalDate dataPrevista;
+
+   @Column(name = "data_entrega", nullable = true)
+    private LocalDate dataEntrega;
+
+   @ManyToOne
+    @JoinColumn(name = "id_equipamento", nullable = false)
+    private Equipamento equipamento;
+
+   @ManyToOne
+    @JoinColumn(name = "id_funcionario", nullable = false)
+    private Funcionario funcionario;
+
+   @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
+
 }

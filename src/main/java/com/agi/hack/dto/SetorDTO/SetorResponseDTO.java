@@ -1,9 +1,9 @@
-package com.agi.hack.dto;
+package com.agi.hack.dto.SetorDTO;
 
 import lombok.Data;
 
 @Data
-public class SetorDTO {
+public class SetorResponseDTO {
     private Long idSetor;
     private String nomeSetor;
 }
