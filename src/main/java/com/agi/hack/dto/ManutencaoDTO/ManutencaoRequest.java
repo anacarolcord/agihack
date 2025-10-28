@@ -1,8 +1,7 @@
-package com.agi.hack.dto;
+package com.agi.hack.dto.ManutencaoDTO;
 
 import com.agi.hack.enums.ListaEquipamento;
 import com.agi.hack.enums.StatusManutencao;
-
 import lombok.*;
 
 @Getter
@@ -12,10 +11,9 @@ import lombok.*;
 @NoArgsConstructor
 public class ManutencaoRequest {
 
-    private String serialNumber;
     private Long equipamentoId;
     private ListaEquipamento listaEquipamento;
     private StatusManutencao statusManutencao;
-    private Long idFuncionario;
+    private Long idUsuario;
 
 }

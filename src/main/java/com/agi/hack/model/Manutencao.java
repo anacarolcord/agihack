@@ -6,8 +6,6 @@ import com.agi.hack.enums.StatusManutencao;
 import jakarta.persistence.*;
 import lombok.*;
 
-import com.agi.hack.enums.ListaEquipamento;
-
 import java.time.LocalDate;
 
 
@@ -58,7 +56,7 @@ public class Manutencao {
     private Funcionario funcionario;
 
    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "id_usuario", nullable = true)
     private Usuario usuario;
 
 }

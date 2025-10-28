@@ -1,11 +1,11 @@
 package com.agi.hack.repository;
 
 import com.agi.hack.enums.ListaEquipamento;
-import com.agi.hack.enums.ListaEquipamento;
 import com.agi.hack.enums.StatusManutencao;
 import com.agi.hack.model.Manutencao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ManutencaoRepository extends JpaRepository<Manutencao, Long> {
@@ -23,8 +23,17 @@ public interface ManutencaoRepository extends JpaRepository<Manutencao, Long> {
     List<Manutencao> findByTipoEquipamentoAndStatusManutencao(ListaEquipamento listaEquipamento, StatusManutencao statusManutencao);
 
     //Por funcionario e status
-    List<Manutencao> findByFuncionarioIdAndStatus(Long funcionarioId, StatusManutencao status);
+    List<Manutencao> findByFuncionarioIdAndStatusManutencao(Long funcionarioId, StatusManutencao status);
 
     //Por equipamento especifico
     List<Manutencao> findByEquipamentoId(Long equipamentoId);
+
+    //Buscar entre duas datas --> equipamentos que entraram em manutencao em um periodo
+    List<Manutencao> findByDataEntradaBetween(LocalDate inicio, LocalDate fim);
+
+    //Buscar em intervalo de previsão de entrega
+    List<Manutencao> findByDataPrevistaBetween(LocalDate inicio, LocalDate fim);
+
+    //Buscar manutencoes entregues em um intervalo de tempo
+    List<Manutencao> findByDataEntregaBetween(LocalDate inicio, LocalDate fim);
 }

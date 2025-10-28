@@ -6,5 +6,5 @@ public enum StatusManutencao {
     EM_REPARO,
     CONCLUIDA,
     FALHA,
-    CANCELADO
+    CANCELADOcom
 }
