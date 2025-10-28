@@ -2,45 +2,53 @@ package com.agi.hack.model;
 
 import com.agi.hack.enums.StatusFuncionario;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "funcionario")
 public class Funcionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long idFuncionario;
 
-    @Column(nullable = false)
+    @NotBlank(message = "O nome do funcionário não pode estar vazio.")
+    @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres.")
+    @Column(nullable = false, length = 100)
     private String nome;
 
-    @Column(nullable = false)
+    @NotBlank(message = "O CPF é obrigatório.")
+    @Pattern(regexp = "^\\d{11}$", message = "CPF deve ter 11 dígitos.")
+    @Column(nullable = false, unique = true, length = 11)
     private String cpf;
 
+    @NotBlank(message = "O e-mail é obrigatório.")
+    @Email(message = "Formato de e-mail inválido.")
+    @Size(max = 100, message = "O e-mail deve ter no máximo 100 caracteres.")
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(nullable = false)
-    private StatusFuncionario statusFuncionario;
-
-    private LocalDate dataCadastro;
-
-    @Column(nullable = false)
-    private LocalDate dataAdmissao;
-
-    private LocalDate dataDesligamento;
-
-    @ManyToOne
-    @JoinColumn(name = "id_setor")
+    // --- RELACIONAMENTO N:1: Setor ---
+    @NotNull(message = "O setor é obrigatório.")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "setor_id", nullable = false)
     private Setor setor;
 
-    @ManyToOne
-    @JoinColumn(name = "id_cargo")
+    // --- RELACIONAMENTO N:1: Cargo ---
+    @NotNull(message = "O cargo é obrigatório.")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cargo_id", nullable = false)
     private Cargo cargo;
+
+    // --- STATUS ---
+    @NotNull(message = "O status do funcionário é obrigatório.")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private StatusFuncionario status = StatusFuncionario.ATIVO;
 }

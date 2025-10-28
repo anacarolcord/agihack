@@ -1,11 +1,9 @@
 package com.agi.hack.service;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
-import com.agi.hack.dto.PedidoRequestDTO;
-import com.agi.hack.dto.PedidoResponseDTO;
+import com.agi.hack.dto.PedidoDTO.PedidoRequestDTO;
+import com.agi.hack.dto.PedidoDTO.PedidoResponseDTO;
 import com.agi.hack.enums.StatusPedido;
 import com.agi.hack.exception.BadRequestException;
 import com.agi.hack.mapper.PedidoMapper;

@@ -1,8 +1,8 @@
-package com.agi.hack.dto;
+package com.agi.hack.dto.EquipamentoDTO;
 
 import com.agi.hack.enums.CategoriaEquipamento;
 import com.agi.hack.enums.StatusEquipamento;
-import jakarta.persistence.ManyToOne;
+import com.agi.hack.model.Setor;
 
 public class EquipamentoResponseDTO {
 
