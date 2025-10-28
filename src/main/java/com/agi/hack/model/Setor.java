@@ -1,6 +1,8 @@
 package com.agi.hack.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +20,7 @@ public class Setor {
 
     @Column(nullable = false, length = 50)
     private String nomeSetor;
+
+    @OneToMany(mappedBy = "setor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Funcionario> funcionarios; // Lista de funcionários deste setor
 }
