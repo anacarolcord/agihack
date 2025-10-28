@@ -1,7 +1,11 @@
 package com.agi.hack.dto.EquipamentoDTO;
 
+import com.agi.hack.dto.ManutencaoResponse;
+import com.agi.hack.dto.PedidoDTO.PedidoResponseDTO;
+import com.agi.hack.dto.SetorDTO.SetorResponseDTO;
 import com.agi.hack.enums.CategoriaEquipamento;
 import com.agi.hack.enums.ClassificacaoEquipamento;
+import com.agi.hack.enums.ListaEquipamento;
 import com.agi.hack.enums.StatusEquipamento;
 import com.agi.hack.model.Manutencao;
 import com.agi.hack.model.Pedido;
@@ -17,7 +21,7 @@ public class EquipamentoResponseDTO {
 
     private Long idEquipamento;
 
-    private String nome;
+    private ListaEquipamento nome;
 
     private Double custoAquisicao;
 
@@ -31,10 +35,15 @@ public class EquipamentoResponseDTO {
 
     private CategoriaEquipamento categoriaEquipamento;
 
-    private List<Manutencao> manutencao;
+    private List<ManutencaoResponse> manutencao;
 
-    private Setor setor;
+    private SetorResponseDTO setor;
 
-    private Pedido pedido;
+    private PedidoResponseDTO pedido;
 
+    public void setNome(ListaEquipamento listaEquipamento, ListaEquipamento listaEquipamento1, ListaEquipamento listaEquipamento2, ListaEquipamento listaEquipamento3) {
+    }
+
+    public void setNome(ListaEquipamento listaEquipamento, ListaEquipamento listaEquipamento1, ListaEquipamento listaEquipamento2, ListaEquipamento listaEquipamento3, ListaEquipamento listaEquipamento4, ListaEquipamento listaEquipamento5) {
+    }
 }

@@ -2,7 +2,9 @@ package com.agi.hack.dto.EquipamentoDTO;
 
 import com.agi.hack.enums.CategoriaEquipamento;
 import com.agi.hack.enums.ClassificacaoEquipamento;
+import com.agi.hack.enums.ListaEquipamento;
 import com.agi.hack.enums.StatusEquipamento;
+import com.agi.hack.model.Funcionario;
 import com.agi.hack.model.Manutencao;
 import com.agi.hack.model.Pedido;
 import com.agi.hack.model.Setor;
@@ -17,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EquipamentoRequestDTO {
-    private String nome;
+    private ListaEquipamento nome;
 
     private Double custoAquisicao;
 
@@ -36,4 +38,6 @@ public class EquipamentoRequestDTO {
     private Setor setor;
 
     private Pedido pedido;
+
+    private Funcionario funcionario;
 }

@@ -1,4 +1,4 @@
-package com.agi.hack.Controller;
+package com.agi.hack.controller;
 
 import com.agi.hack.dto.FuncionarioDTO.FuncionarioRequestDTO;
 import com.agi.hack.dto.FuncionarioDTO.FuncionarioResponseDTO;
