@@ -1,11 +1,12 @@
 package com.agi.hack.model;
 
 
+import com.agi.hack.enums.ListaEquipamento;
 import com.agi.hack.enums.StatusManutencao;
 import jakarta.persistence.*;
 import lombok.*;
 
-import com.agi.hack.enums.EquipmentList;
+import com.agi.hack.enums.ListaEquipamento;
 
 import java.time.LocalDate;
 
@@ -30,7 +31,7 @@ public class Manutencao {
 
    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_equipamento", nullable = false)
-    private EquipmentList tipoEquipamento;
+    private ListaEquipamento tipoEquipamento;
 
    @Enumerated(EnumType.STRING)
     @Column(name = "status_manutencao", nullable = false)
@@ -52,10 +53,12 @@ public class Manutencao {
     @JoinColumn(name = "id_equipamento", nullable = false)
     private Equipamento equipamento;
 
-   @
-
    @ManyToOne
     @JoinColumn(name = "id_funcionario", nullable = false)
     private Funcionario funcionario;
+
+   @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
 }

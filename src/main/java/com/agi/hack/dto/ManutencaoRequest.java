@@ -1,6 +1,8 @@
 package com.agi.hack.dto;
 
-import com.agi.hack.enums.EquipmentList;
+import com.agi.hack.enums.ListaEquipamento;
+import com.agi.hack.enums.StatusManutencao;
+
 import lombok.*;
 
 @Getter
@@ -12,6 +14,8 @@ public class ManutencaoRequest {
 
     private String serialNumber;
     private Long equipamentoId;
-    private EquipmentList equipmentList;
+    private ListaEquipamento listaEquipamento;
+    private StatusManutencao statusManutencao;
+    private Long idFuncionario;
 
 }
