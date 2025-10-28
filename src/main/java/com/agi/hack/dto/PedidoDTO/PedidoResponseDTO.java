@@ -1,4 +1,4 @@
-package com.agi.hack.dto.Pedido;
+package com.agi.hack.dto.PedidoDTO;
 
 import java.time.LocalDateTime;
 

@@ -1,6 +1,7 @@
 package com.agi.hack.model;
 
 import jakarta.persistence.*;
+import com.agi.hack.model.Funcionario;
 import jakarta.persistence.OneToMany;
 import java.util.List;
 import lombok.AllArgsConstructor;

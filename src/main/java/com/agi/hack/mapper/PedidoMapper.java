@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import com.agi.hack.dto.Pedido.PedidoResponseDTO;
-import com.agi.hack.dto.Pedido.PedidoRequestDTO;
+import com.agi.hack.dto.PedidoDTO.PedidoResponseDTO;
+import com.agi.hack.dto.PedidoDTO.PedidoRequestDTO;
 import com.agi.hack.model.Pedido;
 
 @Mapper(componentModel = "spring")
