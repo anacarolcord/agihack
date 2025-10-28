@@ -1,5 +1,6 @@
 package com.agi.hack.dto.EquipamentoDTO;
 
+import com.agi.hack.dto.FuncionarioDTO.FuncionarioResponseDTO;
 import com.agi.hack.dto.ManutencaoResponse;
 import com.agi.hack.dto.PedidoDTO.PedidoResponseDTO;
 import com.agi.hack.dto.SetorDTO.SetorResponseDTO;
@@ -35,11 +36,13 @@ public class EquipamentoResponseDTO {
 
     private CategoriaEquipamento categoriaEquipamento;
 
-    private List<ManutencaoResponse> manutencao;
+    private Manutencao manutencao;
 
     private SetorResponseDTO setor;
 
     private PedidoResponseDTO pedido;
+
+    private FuncionarioResponseDTO funcionario;
 
     public void setNome(ListaEquipamento listaEquipamento, ListaEquipamento listaEquipamento1, ListaEquipamento listaEquipamento2, ListaEquipamento listaEquipamento3) {
     }
