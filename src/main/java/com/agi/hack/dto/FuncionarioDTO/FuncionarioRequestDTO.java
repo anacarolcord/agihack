@@ -1,8 +1,7 @@
 package com.agi.hack.dto.FuncionarioDTO;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.agi.hack.enums.StatusFuncionario; // Import está correto!
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
@@ -12,7 +11,22 @@ public class FuncionarioRequestDTO {
     @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres.")
     private String nome;
 
-    // Recebe apenas o ID do Setor, não o objeto completo.
+    @NotBlank(message = "O CPF é obrigatório.")
+    @Pattern(regexp = "^\\d{11}$", message = "CPF deve ter 11 dígitos (somente números).")
+    private String cpf;
+
+    @NotBlank(message = "O e-mail é obrigatório.")
+    @Email(message = "Formato de e-mail inválido.")
+    private String email;
+
+    // ID de relacionamento para Setor
     @NotNull(message = "O ID do setor é obrigatório.")
     private Long idSetor;
+
+    // ID de relacionamento para Cargo
+    @NotNull(message = "O ID do cargo é obrigatório.")
+    private Long idCargo;
+
+    // Status: Opcional na requisição, usa o nome do Enum CORRETO
+    private StatusFuncionario status; // CORRIGIDO: Era FuncionarioStatus, agora é StatusFuncionario
 }

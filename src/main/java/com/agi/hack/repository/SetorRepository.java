@@ -1,7 +1,9 @@
 package com.agi.hack.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.agi.hack.model.Setor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface SetorRepository extends JpaRepository<Setor, Long > {
+@Repository
+public interface SetorRepository extends JpaRepository<Setor, Long> {
 }
