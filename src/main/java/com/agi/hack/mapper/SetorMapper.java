@@ -1,6 +1,6 @@
 package com.agi.hack.mapper;
 
-import com.agi.hack.dto.SetorDTO; // Assumindo que este DTO existe
+import com.agi.hack.dto.SetorDTO.SetorDTO; // Assumindo que este DTO existe
 import com.agi.hack.model.Setor; // Assumindo que a Entidade existe
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

@@ -1,8 +1,8 @@
 package com.agi.hack.dto.FuncionarioDTO;
 
 import com.agi.hack.enums.StatusFuncionario;
-import com.agi.hack.dto.SetorDTO;  // Import adicionado
-import com.agi.hack.dto.CargoDTO;  // Import adicionado
+import com.agi.hack.dto.SetorDTO.SetorDTO;  // Import adicionado
+import com.agi.hack.dto.CargoDTO.CargoDTO;  // Import adicionado
 import lombok.Data;
 
 @Data
