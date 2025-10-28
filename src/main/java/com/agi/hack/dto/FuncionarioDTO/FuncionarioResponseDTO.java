@@ -5,6 +5,8 @@ import com.agi.hack.dto.SetorDTO.SetorDTO;  // Import adicionado
 import com.agi.hack.dto.CargoDTO.CargoDTO;  // Import adicionado
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class FuncionarioResponseDTO {
 
@@ -15,6 +17,10 @@ public class FuncionarioResponseDTO {
 
     // Status (enum)
     private StatusFuncionario status;
+
+    private LocalDate dataAdmissao;
+
+    private LocalDate dataDesligamento;
 
     // DTO simplificado do Setor (CORREÇÃO: Campo renomeado de 'idSetor' para 'setor')
     private SetorDTO setor;

@@ -4,6 +4,8 @@ import com.agi.hack.enums.StatusFuncionario; // Import está correto!
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class FuncionarioRequestDTO {
 
@@ -29,4 +31,8 @@ public class FuncionarioRequestDTO {
 
     // Status: Opcional na requisição, usa o nome do Enum CORRETO
     private StatusFuncionario status; // CORRIGIDO: Era FuncionarioStatus, agora é StatusFuncionario
+
+    private LocalDate dataAdmissao;
+
+    private LocalDate dataDesligamento;
 }
