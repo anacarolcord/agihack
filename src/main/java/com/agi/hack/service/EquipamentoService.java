@@ -8,6 +8,9 @@ import com.agi.hack.dto.FuncionarioDTO.FuncionarioResponseDTO;
 import com.agi.hack.dto.SetorDTO.SetorRequestDTO;
 import com.agi.hack.dto.SetorDTO.SetorResponseDTO;
 import com.agi.hack.enums.ListaEquipamento;
+import com.agi.hack.enums.StatusEquipamento;
+import com.agi.hack.enums.StatusManutencao;
+import com.agi.hack.enums.StatusPedido;
 import com.agi.hack.exception.ResourceNotFoundException;
 import com.agi.hack.model.Cargo;
 import com.agi.hack.model.Equipamento;
@@ -46,9 +49,6 @@ public class EquipamentoService {
         dto.setStatus(equipamento.getStatus());
         dto.setClassificacaoEquipamento(equipamento.getClassificacaoEquipamento());
         dto.setCategoriaEquipamento(equipamento.getCategoriaEquipamento());
-        dto.setManutencao(equipamento.getManutencao());
-        dto.setSetor(equipamento.getSetor());
-        dto.setPedido(equipamento.getPedido());
 
         return dto;
 
@@ -128,6 +128,7 @@ public class EquipamentoService {
 
         EquipamentoResponseDTO equipamento = new EquipamentoResponseDTO();
 
+
         if (setor.getNomeSetor().equals("TI")){
            equipamento.setNome(ListaEquipamento.NOTEBOOK, ListaEquipamento.MOUSE,ListaEquipamento.HEADSET,ListaEquipamento.ROTEADOR);
            equipamento.setSetor(setor);
@@ -143,4 +144,24 @@ public class EquipamentoService {
             equipamento.setSetor(setor);
         }
     }
+
+    public void alterarStatusEquipamento(EquipamentoResponseDTO dto){
+
+        if(!dto.getManutencao().getStatusManutencao().equals(StatusManutencao.CONCLUIDA)){
+            dto.setStatus(StatusEquipamento.MANUTENCAO);
+        } else if (dto.getFuncionario().getStatus().isAtivo()) {
+            dto.setStatus(StatusEquipamento.EM_USO);
+        } else if (dto.getPedido().getStatus().equals("PENDENTE") || dto.getPedido().getStatus().equals("APROVADO")) {
+            dto.setStatus(StatusEquipamento.PROCESSANDO_COMPRA);
+        } else if (dto.getManutencao().getStatusManutencao().equals(StatusManutencao.FALHA)) {
+            dto.setStatus(StatusEquipamento.SUCATA);
+        }else{
+            dto.setStatus(StatusEquipamento.DISPONIVEL);
+        }
+
+    }
+
+
+
+
 }
