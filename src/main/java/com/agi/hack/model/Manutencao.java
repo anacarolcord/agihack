@@ -40,6 +40,9 @@ public class Manutencao {
    @Column(name = "data_entrada", nullable = false)
     private LocalDate dataEntrada;
 
+   @Column(name = "data_inicio", nullable = false)
+    private LocalDate dataInicio;
+
    @Column(name = "data_prevista", nullable = false)
     private LocalDate dataPrevista;
 
