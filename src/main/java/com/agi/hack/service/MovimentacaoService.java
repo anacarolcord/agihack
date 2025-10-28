@@ -1,10 +1,9 @@
 package com.agi.hack.service;
 
-import com.agi.hack.dto.MovimentacaoRequestDTO; // <<<< Importe o DTO
+import com.agi.hack.dto.MovimentacaoDTO.MovimentacaoRequestDTO; // <<<< Importe o DTO
 
 import com.agi.hack.model.Equipamento;
 import com.agi.hack.model.Funcionario;
-import com.agi.hack.model.Manutencao;
 import com.agi.hack.model.Movimentacao;
 import com.agi.hack.model.RequisicaoEquipamento;
 import com.agi.hack.repository.EquipamentoRepository;

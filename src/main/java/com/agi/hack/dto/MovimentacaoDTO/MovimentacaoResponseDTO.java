@@ -1,4 +1,4 @@
-package com.agi.hack.dto;
+package com.agi.hack.dto.MovimentacaoDTO;
 import com.agi.hack.enums.TipoMovimentacao;
 import com.agi.hack.model.Movimentacao;
 import lombok.AllArgsConstructor;
