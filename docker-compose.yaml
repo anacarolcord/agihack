@@ -1,0 +1,16 @@
+services:
+    db_mysql:
+      image: mysql:9.5.0
+      container_name: mysql-db
+      restart: always
+      environment:
+        MYSQL_DATABASE: usuarios_db
+        MYSQL_USER: teste
+        MYSQL_PASSWORD: 123
+        MYSQL_ROOT_PASSWORD: 1234
+      ports:
+        - "3306:3306"
+      volumes:
+        - 'mysql-db:/var/lib/mysql'
+volumes:
+    mysql-db:
