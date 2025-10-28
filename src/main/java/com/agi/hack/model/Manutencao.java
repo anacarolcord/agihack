@@ -3,10 +3,7 @@ package com.agi.hack.model;
 
 import com.agi.hack.enums.StatusManutencao;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import com.agi.hack.enums.EquipmentList;
 
@@ -14,6 +11,8 @@ import java.time.LocalDate;
 
 
 @Entity
+@EqualsAndHashCode(of = {"idOrdemServico"})
+@ToString
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,9 +28,6 @@ public class Manutencao {
 
     @Column(name = "numero_serial", nullable = false, unique = true, length = 50)
     private String serialNumber;
-
-    @Column(name = "id_equipamento", nullable = false)
-    private Long perifericoId;
 
    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_equipamento", nullable = false)
@@ -50,5 +46,8 @@ public class Manutencao {
    @Column(name = "data_entrega", nullable = false)
     private LocalDate dataEntrega;
 
+   @ManyToOne
+    @JoinColumn(name = "id_equipamento", nullable = false)
+    private Equipamento equipamento;
 
 }
