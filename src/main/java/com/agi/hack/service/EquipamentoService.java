@@ -51,10 +51,10 @@ public class EquipamentoService {
         dto.setCategoriaEquipamento(equipamento.getCategoriaEquipamento());
 
         return dto;
-
     }
 
     public EquipamentoResponseDTO salvar(EquipamentoRequestDTO dados){
+
         Equipamento equipamento = new Equipamento();
 
         equipamento.setNome(dados.getNome());

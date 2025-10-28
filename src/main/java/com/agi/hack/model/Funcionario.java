@@ -34,19 +34,19 @@ public class Funcionario {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    // --- RELACIONAMENTO N:1: Setor ---
     @NotNull(message = "O setor é obrigatório.")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "setor_id", nullable = false)
     private Setor setor;
 
-    // --- RELACIONAMENTO N:1: Cargo ---
     @NotNull(message = "O cargo é obrigatório.")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cargo_id", nullable = false)
     private Cargo cargo;
 
-    // --- STATUS ---
+    @OneToMany(mappedBy = "funcionario")
+
+
     @NotNull(message = "O status do funcionário é obrigatório.")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)

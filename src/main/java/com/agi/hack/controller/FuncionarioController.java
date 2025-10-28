@@ -1,4 +1,4 @@
-package com.agi.hack.controller;
+package com.agi.hack.Controller;
 
 import com.agi.hack.dto.FuncionarioDTO.FuncionarioRequestDTO;
 import com.agi.hack.dto.FuncionarioDTO.FuncionarioResponseDTO;
@@ -32,5 +32,28 @@ public class FuncionarioController {
         return ResponseEntity.ok(funcionarios);
     }
 
-    // Outros endpoints como GET por ID, PUT e DELETE seriam implementados aqui.
+    @GetMapping("/{id}")
+    public ResponseEntity<FuncionarioResponseDTO> getFuncionarioById(@PathVariable long id){
+        FuncionarioResponseDTO dto = funcionarioService.buscarPorId(id);
+        return new ResponseEntity<FuncionarioResponseDTO>(dto, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FuncionarioResponseDTO> atualizarFuncionario(@PathVariable Long id, @RequestBody FuncionarioRequestDTO dto){
+        FuncionarioResponseDTO funcionarioResponseDTO = funcionarioService.atualizarFuncionario(id,dto);
+        return new ResponseEntity<FuncionarioResponseDTO>(funcionarioResponseDTO, HttpStatus.OK);
+    }
+    @PatchMapping("desativar/{id}")
+    public ResponseEntity<FuncionarioResponseDTO> desativarFuncionario(@PathVariable long id){
+        FuncionarioResponseDTO funcionarioResponseDTO = funcionarioService.desativarFuncionario(id);
+        return new ResponseEntity<>(funcionarioResponseDTO, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<FuncionarioResponseDTO> mudarOcupacao(@RequestBody long idCargo, @RequestBody long idSetor, @PathVariable long employeeId){
+
+        FuncionarioResponseDTO funcionarioResponseDTO = funcionarioService.mudarOcupacao(employeeId,idCargo, idSetor);
+        return new ResponseEntity<>(funcionarioResponseDTO, HttpStatus.OK);
+
+    }
 }
