@@ -2,6 +2,7 @@ package com.agi.hack.dto.PedidoDTO;
 
 import java.time.LocalDateTime;
 
+import com.agi.hack.enums.StatusPedido;
 import com.agi.hack.model.Equipamento;
 
 public class PedidoResponseDTO {
@@ -10,14 +11,14 @@ public class PedidoResponseDTO {
     private LocalDateTime dataPedido;
     private LocalDateTime dataPrevisao;
     private String tipo;
-    private String status;
+    private StatusPedido status;
     private Equipamento equipamento;
 
     public PedidoResponseDTO() {
     }
 
     public PedidoResponseDTO(Long idPedido, LocalDateTime dataPedido, LocalDateTime dataPrevisao, String tipo,
-            String status, Equipamento equipamento) {
+            StatusPedido status, Equipamento equipamento) {
         this.idPedido = idPedido;
         this.dataPedido = dataPedido;
         this.dataPrevisao = dataPrevisao;
@@ -58,11 +59,11 @@ public class PedidoResponseDTO {
         this.tipo = tipo;
     }
 
-    public String getStatus() {
+    public StatusPedido getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusPedido status) {
         this.status = status;
     }
 
