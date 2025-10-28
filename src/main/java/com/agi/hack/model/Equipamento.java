@@ -2,6 +2,7 @@ package com.agi.hack.model;
 
 import com.agi.hack.enums.CategoriaEquipamento;
 import com.agi.hack.enums.ClassificacaoEquipamento;
+import com.agi.hack.enums.ListaEquipamento;
 import com.agi.hack.enums.StatusEquipamento;
 
 import com.agi.hack.repository.ManutencaoRepository;
@@ -25,7 +26,8 @@ public class Equipamento {
     private Long idEquipamento;
 
     @Column(nullable = false)
-    private String nome;
+    @Enumerated(EnumType.STRING)
+    private ListaEquipamento nome;
 
     private Double custoAquisicao;
 
@@ -53,6 +55,19 @@ public class Equipamento {
     @JoinColumn(name = "idPedido")
     private Pedido pedido;
 
+    @ManyToOne
+    @JoinColumn(name = "idFuncionario")
+    private Funcionario funcionario;
 
 
+    public void setNome(ListaEquipamento listaEquipamento, ListaEquipamento listaEquipamento1, ListaEquipamento listaEquipamento2) {
+    }
+
+    public void setNome(ListaEquipamento listaEquipamento, ListaEquipamento listaEquipamento1, ListaEquipamento listaEquipamento2, ListaEquipamento listaEquipamento3, ListaEquipamento listaEquipamento4, ListaEquipamento listaEquipamento5) {
+
+    }
+
+    public void setNome(ListaEquipamento listaEquipamento, ListaEquipamento listaEquipamento1, ListaEquipamento listaEquipamento2, ListaEquipamento listaEquipamento3) {
+
+    }
 }

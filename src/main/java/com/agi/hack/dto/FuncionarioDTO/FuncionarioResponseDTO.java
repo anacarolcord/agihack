@@ -1,7 +1,7 @@
 package com.agi.hack.dto.FuncionarioDTO;
 
 import com.agi.hack.enums.StatusFuncionario;
-import com.agi.hack.dto.SetorDTO.SetorDTO;  // Import adicionado
+import com.agi.hack.dto.SetorDTO.SetorResponseDTO;  // Import adicionado
 import com.agi.hack.dto.CargoDTO.CargoDTO;  // Import adicionado
 import lombok.Data;
 
@@ -17,7 +17,7 @@ public class FuncionarioResponseDTO {
     private StatusFuncionario status;
 
     // DTO simplificado do Setor (CORREÇÃO: Campo renomeado de 'idSetor' para 'setor')
-    private SetorDTO setor;
+    private SetorResponseDTO setor;
 
     // Novo DTO simplificado do Cargo (CORREÇÃO: Campo renomeado de 'idCargo' para 'cargo')
     private CargoDTO cargo;

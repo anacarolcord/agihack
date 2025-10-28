@@ -25,6 +25,6 @@ public interface FuncionarioMapper {
 
     // --- Mapeamento de Entidade para Response DTO ---
     // O MapStruct usa SetorMapper e CargoMapper (definidos em 'uses') para mapear Setor/Cargo
-    // para SetorDTO/CargoDTO automaticamente.
+    // para SetorResponseDTO/CargoDTO automaticamente.
     FuncionarioResponseDTO toResponseDTO(Funcionario funcionario);
 }
