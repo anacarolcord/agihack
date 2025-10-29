@@ -1,11 +1,9 @@
 package com.agi.hack.model;
 
 import com.agi.hack.enums.CategoriaEquipamento;
-import com.agi.hack.enums.ClassificacaoEquipamento;
 import com.agi.hack.enums.ListaEquipamento;
 import com.agi.hack.enums.StatusEquipamento;
 
-import com.agi.hack.repository.ManutencaoRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,25 +24,24 @@ public class Equipamento {
     private Long idEquipamento;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private ListaEquipamento nome;
+    private String nome;
 
     private Double custoAquisicao;
 
     private LocalDateTime dataAquisicao;
 
-    private Long numeroSerie;
+    private String numeroSerie;
 
     @Enumerated(EnumType.STRING)
     private StatusEquipamento status;
 
     @Enumerated(EnumType.STRING)
-    private ClassificacaoEquipamento classificacaoEquipamento;
+    private ListaEquipamento tipoEquipamento;
 
     @Enumerated(EnumType.STRING)
     private CategoriaEquipamento categoriaEquipamento;
 
-    @OneToMany(mappedBy = "idManutencao")
+    @OneToMany(mappedBy = "idOrdemServico")
     private List<Manutencao> manutencao;
 
     @ManyToOne

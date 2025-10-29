@@ -47,7 +47,6 @@ public class EquipamentoService {
         dto.setDataAquisicao(equipamento.getDataAquisicao());
         dto.setNumeroSerie(equipamento.getNumeroSerie());
         dto.setStatus(equipamento.getStatus());
-        dto.setClassificacaoEquipamento(equipamento.getClassificacaoEquipamento());
         dto.setCategoriaEquipamento(equipamento.getCategoriaEquipamento());
 
         return dto;
@@ -62,9 +61,7 @@ public class EquipamentoService {
         equipamento.setDataAquisicao(dados.getDataAquisicao());
         equipamento.setNumeroSerie(dados.getNumeroSerie());
         equipamento.setStatus(dados.getStatus());
-        equipamento.setClassificacaoEquipamento(dados.getClassificacaoEquipamento());
         equipamento.setCategoriaEquipamento(dados.getCategoriaEquipamento());
-        equipamento.setManutencao(dados.getManutencao());
         equipamento.setSetor(dados.getSetor());
         equipamento.setPedido(dados.getPedido());
         equipamento.setFuncionario(dados.getFuncionario());
@@ -94,9 +91,7 @@ public class EquipamentoService {
         equipamento.setDataAquisicao(dados.getDataAquisicao());
         equipamento.setNumeroSerie(dados.getNumeroSerie());
         equipamento.setStatus(dados.getStatus());
-        equipamento.setClassificacaoEquipamento(dados.getClassificacaoEquipamento());
         equipamento.setCategoriaEquipamento(dados.getCategoriaEquipamento());
-        equipamento.setManutencao(dados.getManutencao());
         equipamento.setSetor(dados.getSetor());
         equipamento.setPedido(dados.getPedido());
         equipamento.setFuncionario(dados.getFuncionario());
@@ -107,7 +102,13 @@ public class EquipamentoService {
     }
 
     public void deletar(Long id){
-        repository.deleteById(id);
+
+        Equipamento equipamento = repository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Equipamento nao encontrado"));
+
+        equipamento.setStatus(StatusEquipamento.SUCATA);
+
+        repository.save(equipamento);
     }
 
     public void atribuirEquipamento(FuncionarioResponseDTO funcionario){
@@ -117,7 +118,6 @@ public class EquipamentoService {
             if (funcionario.getSetor().getNomeSetor().equals("TI") || funcionario.getSetor().getNomeSetor().equals("RH")
                     || funcionario.getSetor().getNomeSetor().equals("VENDAS")) {
                 equipamentoPorSetor(funcionario.getSetor());
-
             }
         }else throw new ResourceNotFoundException("Funcionario nao encontrado");
 
@@ -144,19 +144,20 @@ public class EquipamentoService {
         }
     }
 
-    public void alterarStatusEquipamento(EquipamentoResponseDTO dto){
+    public void alterarStatusEquipamento(EquipamentoRequestDTO dto){
 
         if(!dto.getManutencao().getStatusManutencao().equals(StatusManutencao.CONCLUIDA)){
             dto.setStatus(StatusEquipamento.MANUTENCAO);
         } else if (dto.getFuncionario().getStatus().isAtivo()) {
             dto.setStatus(StatusEquipamento.EM_USO);
-        } else if (dto.getPedido().getStatus().equals("PENDENTE") || dto.getPedido().getStatus().equals("APROVADO")) {
+        } else if (dto.getPedido().getStatus().equals(StatusPedido.PENDENTE) || dto.getPedido().getStatus().equals(StatusPedido.APROVADO)) {
             dto.setStatus(StatusEquipamento.PROCESSANDO_COMPRA);
         } else if (dto.getManutencao().getStatusManutencao().equals(StatusManutencao.FALHA)) {
             dto.setStatus(StatusEquipamento.SUCATA);
         }else{
             dto.setStatus(StatusEquipamento.DISPONIVEL);
         }
+
 
     }
 
