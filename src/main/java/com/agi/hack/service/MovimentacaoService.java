@@ -5,12 +5,12 @@ import com.agi.hack.dto.MovimentacaoDTO.MovimentacaoRequestDTO; // <<<< Importe 
 import com.agi.hack.model.Equipamento;
 import com.agi.hack.model.Funcionario;
 import com.agi.hack.model.Movimentacao;
-import com.agi.hack.model.RequisicaoEquipamento;
+import com.agi.hack.model.Pedido;
 import com.agi.hack.repository.EquipamentoRepository;
 import com.agi.hack.repository.FuncionarioRepository;
 import com.agi.hack.repository.ManutencaoRepository;
 import com.agi.hack.repository.MovimentacaoRepository;
-import com.agi.hack.repository.RequisicaoEquipamentoRepository;
+import com.agi.hack.repository.PedidoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class MovimentacaoService {
     private final MovimentacaoRepository movimentacaoRepository;
     private final EquipamentoRepository equipamentoRepository;
     private final FuncionarioRepository funcionarioRepository;
-    private final RequisicaoEquipamentoRepository requisicaoRepository;
+    private final PedidoRepository requisicaoRepository;
     private final ManutencaoRepository manutencaoRepository;
 
 
@@ -32,7 +32,7 @@ public class MovimentacaoService {
     public MovimentacaoService(MovimentacaoRepository movimentacaoRepository,
                                EquipamentoRepository equipamentoRepository,
                                FuncionarioRepository funcionarioRepository,
-                               RequisicaoEquipamentoRepository requisicaoRepository,
+                               PedidoRepository requisicaoRepository,
                                ManutencaoRepository manutencaoRepository) {
         this.movimentacaoRepository = movimentacaoRepository;
         this.equipamentoRepository = equipamentoRepository;

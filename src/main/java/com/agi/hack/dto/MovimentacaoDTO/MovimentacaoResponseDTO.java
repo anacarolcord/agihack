@@ -25,7 +25,7 @@ public class MovimentacaoResponseDTO {
     private String nomeFuncionario;
 
 
-    private Long requisicaoId;
+    private Long idPedido;
 
 
     private Long manutencaoId;
@@ -39,24 +39,24 @@ public class MovimentacaoResponseDTO {
 
 
         if (movimentacao.getEquipamento() != null) {
-            this.equipamentoId = movimentacao.getEquipamento().getId();
+            this.equipamentoId = movimentacao.getEquipamento().getIdEquipamento();
             this.nomeEquipamento = movimentacao.getEquipamento().getNome();
         }
 
 
         if (movimentacao.getFuncionario() != null) {
-            this.funcionarioId = movimentacao.getFuncionario().getId();
+            this.funcionarioId = movimentacao.getFuncionario().getIdFuncionario();
             this.nomeFuncionario = movimentacao.getFuncionario().getNome();
         }
 
 
-        if (movimentacao.getRequisicao() != null) {
-            this.requisicaoId = movimentacao.getRequisicao().getId();
+        if (movimentacao.getPedido() != null) {
+            this.idPedido = movimentacao.getPedido().getIdPedido();
         }
 
 
         if (movimentacao.getManutencao() != null) {
-            this.manutencaoId = movimentacao.getManutencao().getId();
+            this.manutencaoId = movimentacao.getManutencao().getIdOrdemServico();
         }
     }
 }

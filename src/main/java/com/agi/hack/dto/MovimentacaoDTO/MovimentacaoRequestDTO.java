@@ -19,7 +19,7 @@ public class MovimentacaoRequestDTO {
 
     private String observacoes;
 
-    private Long idRequisicao;
+    private Long idPedido;
 
     private Long idManutencao;
 
@@ -29,7 +29,7 @@ public class MovimentacaoRequestDTO {
         this.idFuncionario = idFuncionario;
         this.tipo = tipo;
         this.observacoes = observacoes;
-        this.idRequisicao = idRequisicao;
+        this.idPedido = idRequisicao;
         this.idManutencao = idManutencao;
     }
 

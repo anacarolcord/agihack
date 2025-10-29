@@ -40,7 +40,7 @@ public class Movimentacao {
 
     @ManyToOne
     @JoinColumn(name = "requisicao_equipamento_id")
-    private RequisicaoEquipamento requisicaoEquipamento;
+    private Pedido pedido;
 
     @ManyToOne
     @JoinColumn(name = "manutencao_id")
