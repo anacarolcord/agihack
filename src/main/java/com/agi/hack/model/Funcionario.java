@@ -1,11 +1,14 @@
 package com.agi.hack.model;
 
 import com.agi.hack.enums.StatusFuncionario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -34,21 +37,33 @@ public class Funcionario {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    // --- RELACIONAMENTO N:1: Setor ---
     @NotNull(message = "O setor é obrigatório.")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "setor_id", nullable = false)
     private Setor setor;
 
-    // --- RELACIONAMENTO N:1: Cargo ---
     @NotNull(message = "O cargo é obrigatório.")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cargo_id", nullable = false)
     private Cargo cargo;
 
-    // --- STATUS ---
-    @NotNull(message = "O status do funcionário é obrigatório.")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private StatusFuncionario status = StatusFuncionario.ATIVO;
+    private StatusFuncionario status;
+
+    @OneToMany(mappedBy = "funcionario")
+    @JsonIgnore
+    private List<Equipamento> equipamentos;
+
+    @OneToMany(mappedBy = "funcionario")
+    @JsonIgnore
+    private List<Movimentacao> movimentacoes;
+
+    @OneToMany
+    @JsonIgnore
+    private List<Manutencao> manutencaos;
+
+    @OneToOne(mappedBy = "funcionario")
+    @JsonIgnore
+    private Usuario usuario;
 }

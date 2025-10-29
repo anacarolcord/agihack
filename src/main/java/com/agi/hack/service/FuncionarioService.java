@@ -3,14 +3,19 @@ package com.agi.hack.service;
 import com.agi.hack.dto.FuncionarioDTO.FuncionarioRequestDTO;
 import com.agi.hack.dto.FuncionarioDTO.FuncionarioResponseDTO;
 import com.agi.hack.enums.StatusFuncionario;
+import com.agi.hack.exception.FuncionarioNotFound;
+import com.agi.hack.exception.ResourceNotFoundException;
 import com.agi.hack.mapper.FuncionarioMapper;
 import com.agi.hack.model.Cargo;
+import com.agi.hack.model.Equipamento;
 import com.agi.hack.model.Funcionario;
 import com.agi.hack.model.Setor;
 import com.agi.hack.repository.CargoRepository;
 import com.agi.hack.repository.FuncionarioRepository;
 import com.agi.hack.repository.SetorRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,17 +29,20 @@ public class FuncionarioService {
     private final SetorRepository setorRepository;
     private final CargoRepository cargoRepository;
     private final FuncionarioMapper funcionarioMapper;
+    private final EquipamentoService equipamentoService;
 
     public FuncionarioService(
             FuncionarioRepository funcionarioRepository,
             SetorRepository setorRepository,
             CargoRepository cargoRepository,
-            FuncionarioMapper funcionarioMapper
+            FuncionarioMapper funcionarioMapper,
+            EquipamentoService equipamentoService
     ) {
         this.funcionarioRepository = funcionarioRepository;
         this.setorRepository = setorRepository;
         this.cargoRepository = cargoRepository;
         this.funcionarioMapper = funcionarioMapper;
+        this.equipamentoService = equipamentoService;
     }
 
     // --- MÉTODOS AUXILIARES ---
@@ -49,9 +57,6 @@ public class FuncionarioService {
                 .orElseThrow(() -> new EntityNotFoundException("Cargo não encontrado com ID: " + idCargo));
     }
 
-    // --- CRUD: CRIAÇÃO ---
-
-    @Transactional
     public FuncionarioResponseDTO criarFuncionario(FuncionarioRequestDTO dto) {
         Setor setor = buscarSetorPorId(dto.getIdSetor());
         Cargo cargo = buscarCargoPorId(dto.getIdCargo());
@@ -60,13 +65,16 @@ public class FuncionarioService {
 
         funcionario.setSetor(setor);
         funcionario.setCargo(cargo);
-
-        if (dto.getStatus() == null) {
-            funcionario.setStatus(StatusFuncionario.ATIVO);
-        }
+        funcionario.setStatus(StatusFuncionario.ATIVO);
 
         Funcionario savedFuncionario = funcionarioRepository.save(funcionario);
         return funcionarioMapper.toResponseDTO(savedFuncionario);
+    }
+
+    public FuncionarioResponseDTO criarEAssociarEquipamento(FuncionarioRequestDTO requestDTO) {
+        FuncionarioResponseDTO responseDTo = criarFuncionario(requestDTO);
+        equipamentoService.atribuirEquipamento(responseDTo);
+        return responseDTo;
     }
 
     // --- CRUD: LISTAGEM GERAL ---
@@ -112,22 +120,28 @@ public class FuncionarioService {
         return funcionarioMapper.toResponseDTO(updatedFuncionario);
     }
 
-    // --- CRUD: SOFT-DELETE/DESATIVAÇÃO (CORRIGIDO) ---
-
     @Transactional
-    public void desativarFuncionario(Long id) {
+    public FuncionarioResponseDTO desativarFuncionario(Long id) {
         Funcionario funcionario = funcionarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Funcionário não encontrado com ID: " + id));
 
-        // CORREÇÃO: Removemos a checagem por DEMITIDO, verificando apenas se já está INATIVO
         if (funcionario.getStatus() != StatusFuncionario.INATIVO)
         {
-            // Alteramos o status para INATIVO
             funcionario.setStatus(StatusFuncionario.INATIVO);
-            funcionarioRepository.save(funcionario);
+            Funcionario saved = funcionarioRepository.save(funcionario);
+             return funcionarioMapper.toResponseDTO(saved);
         } else {
-            // CORREÇÃO: Mensagem de erro reflete o único status final, INATIVO
             throw new IllegalStateException("O funcionário com ID " + id + " já está INATIVO e não pode ser desativado novamente.");
         }
+    }
+
+    public FuncionarioResponseDTO mudarOcupacao( long idFuncionario,long idCargo, Long idSetor){
+         Funcionario funcionario = funcionarioRepository.findById(idFuncionario).orElseThrow(()-> new FuncionarioNotFound("Funcionário não encontrado"));
+         Setor setor = setorRepository.findById(idSetor).orElseThrow(() -> new ResourceNotFoundException("Setor não encontrado"));
+         Cargo cargo = cargoRepository.findById(idCargo).orElseThrow(()-> new ResourceNotFoundException("Cargo não encontrado"));
+         funcionario.setSetor(setor);
+         funcionario.setCargo(cargo);
+         Funcionario saved = funcionarioRepository.save(funcionario);
+         return funcionarioMapper.toResponseDTO(saved);
     }
 }

@@ -51,10 +51,10 @@ public class EquipamentoService {
         dto.setCategoriaEquipamento(equipamento.getCategoriaEquipamento());
 
         return dto;
-
     }
 
     public EquipamentoResponseDTO salvar(EquipamentoRequestDTO dados){
+
         Equipamento equipamento = new Equipamento();
 
         equipamento.setNome(dados.getNome());
@@ -127,7 +127,6 @@ public class EquipamentoService {
     public void equipamentoPorSetor(SetorResponseDTO setor){
 
         EquipamentoResponseDTO equipamento = new EquipamentoResponseDTO();
-
 
         if (setor.getNomeSetor().equals("TI")){
            equipamento.setNome(ListaEquipamento.NOTEBOOK, ListaEquipamento.MOUSE,ListaEquipamento.HEADSET,ListaEquipamento.ROTEADOR);

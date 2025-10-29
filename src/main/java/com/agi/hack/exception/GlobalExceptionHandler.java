@@ -46,4 +46,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 
+    @ExceptionHandler(FuncionarioNotFound.class)
+    public ResponseEntity<ErrorResponseDTO> funcionarioNotFound(FuncionarioNotFound exception, HttpServletRequest request){
+        ErrorResponseDTO dto = new ErrorResponseDTO(exception.getMessage(),
+                HttpStatus.NOT_FOUND.value(),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+                request.getRequestURI());
+        return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
+    }
+
 }
