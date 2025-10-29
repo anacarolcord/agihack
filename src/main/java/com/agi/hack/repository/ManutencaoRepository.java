@@ -31,9 +31,9 @@ public interface ManutencaoRepository extends JpaRepository<Manutencao, Long> {
     //Buscar entre duas datas --> equipamentos que entraram em manutencao em um periodo
     List<Manutencao> findByDataEntradaBetween(LocalDate inicio, LocalDate fim);
 
-    //Buscar em intervalo de previsão de entrega
-    List<Manutencao> findByDataPrevistaBetween(LocalDate inicio, LocalDate fim);
+    //Buscar a data de previsao de entrega do equipamento
+    List<Manutencao> findByEquipamentoIdAndDataPrevisao(Long equipamentoId, LocalDate dataPrevisao);
 
-    //Buscar manutencoes entregues em um intervalo de tempo
-    List<Manutencao> findByDataEntregaBetween(LocalDate inicio, LocalDate fim);
+    //Buscar data de entrega do equipamento apos manuteção
+    List<Manutencao> findByEquipamentoIdAndDataEntrega(Long equipamentoId, LocalDate dataEntrega);
 }
