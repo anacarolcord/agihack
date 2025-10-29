@@ -55,4 +55,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(CredenciaisInvalidasException.class)
+    public ResponseEntity<ErrorResponseDTO> crendenciaisInvalidas(CredenciaisInvalidasException exception, HttpServletRequest request){
+        ErrorResponseDTO dto = new ErrorResponseDTO(exception.getMessage(),
+                HttpStatus.FORBIDDEN.value(),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+                request.getRequestURI());
+        return new ResponseEntity<>(dto, HttpStatus.FORBIDDEN);
+    }
+
 }

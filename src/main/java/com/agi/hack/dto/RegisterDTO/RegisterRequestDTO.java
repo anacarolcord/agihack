@@ -1,4 +1,4 @@
-package com.agi.hack.dto;
+package com.agi.hack.dto.RegisterDTO;
 
 import com.agi.hack.enums.TipoUsuario;
 import jakarta.validation.constraints.NotBlank;

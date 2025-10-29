@@ -1,34 +1,49 @@
 package com.agi.hack.service;
 
-import com.agi.hack.dto.RegisterRequestDTO;
-import com.agi.hack.dto.RegisterResponseDTO;
-import com.agi.hack.mapper.UsuarioMapper;
+import com.agi.hack.config.TokenConfig;
+import com.agi.hack.dto.LoginDTO.LoginResponseDTO;
+import com.agi.hack.exception.CredenciaisInvalidasException;
 import com.agi.hack.model.Usuario;
 import com.agi.hack.repository.UsuarioRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthService implements UserDetailsService {
 
-    private final PasswordEncoder passwordEncoder;
     private final UsuarioRepository usuarioRepository;
-    private final UsuarioMapper usuarioMapper;
+    private final TokenConfig tokenConfig;
 
-    public ResponseEntity<RegisterResponseDTO> novoUsuario(@Valid RegisterRequestDTO registerRequest) {
-        Usuario usuario = new Usuario();
+    @Bean
+    public PasswordEncoder passwordEnconder(){
+        return new BCryptPasswordEncoder();
+    }
 
-        usuario.setEmail(registerRequest.email());
-        usuario.setSenha(passwordEncoder.encode(registerRequest.senha()));
-        usuario.setTipoUsuario(registerRequest.tipoUsuario());
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
-        usuarioRepository.save(usuario);
+    @Override
+    public UserDetails loadUserByUsername(String username){
+        return usuarioRepository.findUsuariosByUsername(username).orElseThrow(()-> new CredenciaisInvalidasException("Credenciais inválidas, verifique o username e senha insereridos!"));
+    }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioMapper.toRegisterResponseDto(usuario));
+    public ResponseEntity<LoginResponseDTO> login(Authentication authentication){
+        Usuario usuario = (Usuario) authentication.getPrincipal();
+        String token = tokenConfig.gerarToken(usuario);
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 }

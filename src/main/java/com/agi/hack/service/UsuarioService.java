@@ -1,8 +1,7 @@
 package com.agi.hack.service;
 
-import com.agi.hack.config.TokenConfig;
-import com.agi.hack.dto.RegisterRequestDTO;
-import com.agi.hack.dto.RegisterResponseDTO;
+import com.agi.hack.dto.RegisterDTO.RegisterRequestDTO;
+import com.agi.hack.dto.RegisterDTO.RegisterResponseDTO;
 import com.agi.hack.mapper.UsuarioMapper;
 import com.agi.hack.model.Usuario;
 import com.agi.hack.repository.UsuarioRepository;
