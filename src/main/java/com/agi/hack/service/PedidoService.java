@@ -40,21 +40,22 @@ public class PedidoService {
         return pedidoMapper.toResponseDTOList(pedidos);
     }
 
-    public PedidoResponseDTO atualizarPedidoAprovado(Long id) {
+    public PedidoResponseDTO aprovarPedido(Long id) {
         Pedido pedido = buscarPorId(id);
         pedido.setStatus(StatusPedido.APROVADO);
+        pedido.setDataPrevisao(LocalDateTime.now().plusDays(7));
         Pedido pedidoAtualizado = pedidoRepository.save(pedido);
         return pedidoMapper.toResponseDTO(pedidoAtualizado);
     }
 
-    public PedidoResponseDTO atualizarPedidoCancelado(Long id) {
+    public PedidoResponseDTO cancelarPedido(Long id) {
         Pedido pedido = buscarPorId(id);
         pedido.setStatus(StatusPedido.CANCELADO);
         Pedido pedidoAtualizado = pedidoRepository.save(pedido);
         return pedidoMapper.toResponseDTO(pedidoAtualizado);
     }
 
-    public PedidoResponseDTO atualizarPedidoConcluido(Long id) {
+    public PedidoResponseDTO concluirPedido(Long id) {
         Pedido pedido = buscarPorId(id);
         pedido.setStatus(StatusPedido.CONCLUIDO);
         Pedido pedidoAtualizado = pedidoRepository.save(pedido);
