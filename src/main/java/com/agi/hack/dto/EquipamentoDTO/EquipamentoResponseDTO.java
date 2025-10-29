@@ -1,7 +1,7 @@
 package com.agi.hack.dto.EquipamentoDTO;
 
 import com.agi.hack.dto.FuncionarioDTO.FuncionarioResponseDTO;
-import com.agi.hack.dto.ManutencaoResponse;
+import com.agi.hack.dto.ManutencaoDTO.ManutencaoResponse;
 import com.agi.hack.dto.PedidoDTO.PedidoResponseDTO;
 import com.agi.hack.dto.SetorDTO.SetorResponseDTO;
 import com.agi.hack.enums.CategoriaEquipamento;
