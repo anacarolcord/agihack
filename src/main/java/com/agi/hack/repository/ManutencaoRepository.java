@@ -10,30 +10,36 @@ import java.util.List;
 
 public interface ManutencaoRepository extends JpaRepository<Manutencao, Long> {
 
-    //Buscar manutenção por seu status
+    // Buscar manutenção por status
     List<Manutencao> findByStatusManutencao(StatusManutencao status);
 
-    //Buscar equipamento por tipo
-    List<Manutencao> findByTipoEquipamento(ListaEquipamento tipoequipamento);
+    // Buscar manutenção por tipo de equipamento
+    List<Manutencao> findByTipoEquipamento(ListaEquipamento tipoEquipamento);
 
-    //Buscar por funcionario responsavel pelo equipamento
-    List<Manutencao> findByEquipamentoFuncionarioId(Long funcionarioId);
+    // Buscar por funcionário responsável pela manutenção
+    // CORREÇÃO: findByFuncionario_IdFuncionario
+    List<Manutencao> findByFuncionario_IdFuncionario(Long funcionarioId);
 
-    //Por tipo e status
-    List<Manutencao> findByTipoEquipamentoAndStatusManutencao(ListaEquipamento listaEquipamento, StatusManutencao statusManutencao);
+    // Por tipo e status
+    List<Manutencao> findByTipoEquipamentoAndStatusManutencao(ListaEquipamento tipoEquipamento, StatusManutencao status);
 
-    //Por funcionario e status
-    List<Manutencao> findByFuncionarioIdAndStatusManutencao(Long funcionarioId, StatusManutencao status);
+    // Por funcionário e status
+    // CORREÇÃO: findByFuncionario_IdFuncionarioAndStatusManutencao
+    List<Manutencao> findByFuncionario_IdFuncionarioAndStatusManutencao(Long funcionarioId, StatusManutencao status);
 
-    //Por equipamento especifico
-    List<Manutencao> findByEquipamentoId(Long equipamentoId);
+    // Por equipamento específico
+    // CORREÇÃO: findByEquipamento_IdEquipamento
+    List<Manutencao> findByEquipamento_IdEquipamento(Long equipamentoId);
 
-    //Buscar entre duas datas --> equipamentos que entraram em manutencao em um periodo
+    // Buscar entre duas datas (equipamentos que entraram em manutenção em um período)
     List<Manutencao> findByDataEntradaBetween(LocalDate inicio, LocalDate fim);
 
-    //Buscar a data de previsao de entrega do equipamento
-    List<Manutencao> findByEquipamentoIdAndDataPrevisao(Long equipamentoId, LocalDate dataPrevisao);
+    // Buscar previsão de entrega de um equipamento
+    // CORREÇÃO: findByEquipamento_IdEquipamentoAndDataPrevista
+    List<Manutencao> findByEquipamento_IdEquipamentoAndDataPrevista(Long equipamentoId, LocalDate dataPrevista);
 
-    //Buscar data de entrega do equipamento apos manuteção
-    List<Manutencao> findByEquipamentoIdAndDataEntrega(Long equipamentoId, LocalDate dataEntrega);
+    // Buscar data de entrega do equipamento após manutenção
+    // CORREÇÃO: findByEquipamento_IdEquipamentoAndDataEntrega
+    List<Manutencao> findByEquipamento_IdEquipamentoAndDataEntrega(Long equipamentoId, LocalDate dataEntrega);
+
 }

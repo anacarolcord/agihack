@@ -16,6 +16,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+// IMPORT CORRIGIDO
+import com.agi.hack.model.Equipamento;
+
 @Entity
 @Table(name = "pedidos")
 public class Pedido {
@@ -34,7 +37,8 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
-    @OneToOne(mappedBy = "dispositivo", cascade = CascadeType.ALL)
+    // MAPEAMENTO CORRIGIDO: Deve ser "pedido" para corresponder ao campo em Equipamento.java
+    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
     @JsonBackReference
     private Equipamento equipamento;
 
@@ -42,7 +46,7 @@ public class Pedido {
     }
 
     public Pedido(Long idPedido, LocalDateTime dataPedido, LocalDateTime dataPrevisao, ListaEquipamento tipo,
-            StatusPedido status, Equipamento equipamento) {
+                  StatusPedido status, Equipamento equipamento) {
         this.idPedido = idPedido;
         this.dataPedido = dataPedido;
         this.dataPrevisao = dataPrevisao;
