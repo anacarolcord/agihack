@@ -12,6 +12,7 @@ import lombok.*;
 public class ManutencaoRequest {
 
     private Long equipamentoId;
+    private String serialNumber;
     private ListaEquipamento listaEquipamento;
     private StatusManutencao statusManutencao;
     private Long idUsuario;

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class ManutencaoResponse {
 
     private Long idOrdemServico;
+    private String serialNumber;
     private Long idEquipamento;
     private ListaEquipamento listaEquipamento;
     private StatusManutencao statusManutencao;
