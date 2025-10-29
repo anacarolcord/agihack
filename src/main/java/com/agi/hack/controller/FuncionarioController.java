@@ -1,4 +1,4 @@
-package com.agi.hack.Controller;
+package com.agi.hack.controller;
 
 import com.agi.hack.dto.FuncionarioDTO.FuncionarioRequestDTO;
 import com.agi.hack.dto.FuncionarioDTO.FuncionarioResponseDTO;
@@ -54,6 +54,10 @@ public class FuncionarioController {
 
         FuncionarioResponseDTO funcionarioResponseDTO = funcionarioService.mudarOcupacao(employeeId,idCargo, idSetor);
         return new ResponseEntity<>(funcionarioResponseDTO, HttpStatus.OK);
+    }
 
+    public ResponseEntity<FuncionarioResponseDTO> atualziarFuncionario(@Valid @RequestBody FuncionarioRequestDTO dto){
+        FuncionarioResponseDTO responseDTO = funcionarioService.criarEAssociarEquipamento(dto);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 }

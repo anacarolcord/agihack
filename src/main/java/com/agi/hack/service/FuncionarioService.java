@@ -7,6 +7,7 @@ import com.agi.hack.exception.FuncionarioNotFound;
 import com.agi.hack.exception.ResourceNotFoundException;
 import com.agi.hack.mapper.FuncionarioMapper;
 import com.agi.hack.model.Cargo;
+import com.agi.hack.model.Equipamento;
 import com.agi.hack.model.Funcionario;
 import com.agi.hack.model.Setor;
 import com.agi.hack.repository.CargoRepository;
@@ -28,17 +29,20 @@ public class FuncionarioService {
     private final SetorRepository setorRepository;
     private final CargoRepository cargoRepository;
     private final FuncionarioMapper funcionarioMapper;
+    private final EquipamentoService equipamentoService;
 
     public FuncionarioService(
             FuncionarioRepository funcionarioRepository,
             SetorRepository setorRepository,
             CargoRepository cargoRepository,
-            FuncionarioMapper funcionarioMapper
+            FuncionarioMapper funcionarioMapper,
+            EquipamentoService equipamentoService
     ) {
         this.funcionarioRepository = funcionarioRepository;
         this.setorRepository = setorRepository;
         this.cargoRepository = cargoRepository;
         this.funcionarioMapper = funcionarioMapper;
+        this.equipamentoService = equipamentoService;
     }
 
     // --- MÉTODOS AUXILIARES ---
@@ -53,7 +57,6 @@ public class FuncionarioService {
                 .orElseThrow(() -> new EntityNotFoundException("Cargo não encontrado com ID: " + idCargo));
     }
 
-    @Transactional
     public FuncionarioResponseDTO criarFuncionario(FuncionarioRequestDTO dto) {
         Setor setor = buscarSetorPorId(dto.getIdSetor());
         Cargo cargo = buscarCargoPorId(dto.getIdCargo());
@@ -62,13 +65,16 @@ public class FuncionarioService {
 
         funcionario.setSetor(setor);
         funcionario.setCargo(cargo);
-
-        if (dto.getStatus() == null) {
-            funcionario.setStatus(StatusFuncionario.ATIVO);
-        }
+        funcionario.setStatus(StatusFuncionario.ATIVO);
 
         Funcionario savedFuncionario = funcionarioRepository.save(funcionario);
         return funcionarioMapper.toResponseDTO(savedFuncionario);
+    }
+
+    public FuncionarioResponseDTO criarEAssociarEquipamento(FuncionarioRequestDTO requestDTO) {
+        FuncionarioResponseDTO responseDTo = criarFuncionario(requestDTO);
+        equipamentoService.atribuirEquipamento(responseDTo);
+        return responseDTo;
     }
 
     // --- CRUD: LISTAGEM GERAL ---

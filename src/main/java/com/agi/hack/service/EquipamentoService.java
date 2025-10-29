@@ -128,7 +128,6 @@ public class EquipamentoService {
 
         EquipamentoResponseDTO equipamento = new EquipamentoResponseDTO();
 
-
         if (setor.getNomeSetor().equals("TI")){
            equipamento.setNome(ListaEquipamento.NOTEBOOK, ListaEquipamento.MOUSE,ListaEquipamento.HEADSET,ListaEquipamento.ROTEADOR);
            equipamento.setSetor(setor);
