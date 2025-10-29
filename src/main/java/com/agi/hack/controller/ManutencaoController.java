@@ -7,6 +7,7 @@ import com.agi.hack.model.Equipamento;
 import com.agi.hack.model.Manutencao;
 import com.agi.hack.repository.EquipamentoRepository;
 import com.agi.hack.repository.ManutencaoRepository;
+import com.agi.hack.service.ManutencaoService;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ManutencaoController {
 
-    private final ManutencaoRepository manutencaoRepository;
+    private final ManutencaoService manutencaoService;
 
     //Listar todas as manutenção que não estão com status de cancelada
     @GetMapping
     public List<ManutencaoResponse> listarTodasAtivas() {
-        return manutencaoService.listarAtivas().stream()
+        return manutencaoService.listarAtivos().stream()
                 .map(this::toResponseDTO)
                 .collect(Collectors.toList());
     }
@@ -35,7 +36,7 @@ public class ManutencaoController {
     //Busca GET por ID
     @GetMapping("/{id}")
     public ResponseEntity<ManutencaoResponse> buscarPorIDAtivas(@PathVariable Long id) {
-        return manutencaoService.buscarPorIdAtiva(id)
+        return manutencaoService.buscarPorIdAtivo(id)
                 .map(m -> ResponseEntity.ok(toResponseDTO(m)))
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -43,7 +44,7 @@ public class ManutencaoController {
     //Busca GET por Status
     @GetMapping("/status/{status")
     public List<ManutencaoResponse> buscarPorStatus(@PathVariable StatusManutencao statusManutencao) {
-        return manutencaoService.buscarPorStatusManutencao(statusManutencao).stream()
+        return manutencaoService.buscarPorStatusAtivo(statusManutencao).stream()
                 .map(this::toResponseDTO)
                 .collect(Collectors.toList());
     }
@@ -51,7 +52,7 @@ public class ManutencaoController {
     //Busca GET por intevalos de datas de entrada
     @GetMapping("/entrata")
     public List<ManutencaoResponse> buscarPorData(@RequestParam("inicio")LocalDate inicio, @RequestParam("fim") LocalDate fim) {
-        return manutencaoService.buscarPorDataEntradaAtivas(inicio, fim).stream()
+        return manutencaoService.buscarPorDataEntradaAtivo(inicio, fim).stream()
                 .map(this::toResponseDTO)
                 .collect(Collectors.toList());
 
@@ -83,8 +84,8 @@ public class ManutencaoController {
     //Metodo Auxiliar: Entidade -> DTO
 
     private ManutencaoResponse toResponseDTO(Manutencao m){
-        Long usuarioId = m.getUsuario() !=null ? m.getUsuario().getIdUsuario() : null;
-        String nomeUsuario = m.getUsuario() !=null ? m.getUsuario().getNome() : null;
+        Long usuarioId = m.getUsuario() !=null ? m.getUsuario().getId() : null;
+        String nomeUsuario = m.getUsuario() !=null ? m.getUsuario().getUsername() : null;
 
         return new ManutencaoResponse(
                 m.getIdOrdemServico(),

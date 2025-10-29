@@ -76,7 +76,7 @@ public class ManutencaoService {
         Manutencao manutencao = new Manutencao();
         manutencao.setEquipamento(equipamento);
         manutencao.setSerialNumber(equipamento.getNumeroSerie());
-        manutencao.setTipoEquipamento(equipamento.getNome());
+        manutencao.setTipoEquipamento(equipamento.getTipoEquipamento());
         manutencao.setStatusManutencao(request.getStatusManutencao());
         manutencao.setDataEntrada(LocalDate.now());
 
@@ -107,7 +107,7 @@ public class ManutencaoService {
                     .orElseThrow(() -> new RuntimeException("Equipamento não encontrado"));
             manutencao.setEquipamento(equipamento);
             manutencao.setSerialNumber(equipamento.getNumeroSerie());
-            manutencao.setTipoEquipamento(equipamento.getNome());
+            manutencao.setTipoEquipamento(equipamento.getTipoEquipamento());
             manutencao.setFuncionario(equipamento.getFuncionario());
 
             try {

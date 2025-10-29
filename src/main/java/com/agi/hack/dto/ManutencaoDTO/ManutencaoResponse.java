@@ -25,4 +25,6 @@ public class ManutencaoResponse {
     private Long usuarioId;
     private String nomeUsuario;
 
+    public ManutencaoResponse(Long idOrdemServico, Long idEquipamento, ListaEquipamento tipoEquipamento, StatusManutencao statusManutencao, LocalDate dataEntrada, LocalDate dataInicio, LocalDate dataPrevista, LocalDate dataEntrega, Long usuarioId, String nomeUsuario) {
+    }
 }
