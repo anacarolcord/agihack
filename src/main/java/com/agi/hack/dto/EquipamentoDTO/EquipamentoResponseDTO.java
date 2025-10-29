@@ -1,20 +1,15 @@
 package com.agi.hack.dto.EquipamentoDTO;
 
 import com.agi.hack.dto.FuncionarioDTO.FuncionarioResponseDTO;
-import com.agi.hack.dto.ManutencaoDTO.ManutencaoResponse;
 import com.agi.hack.dto.PedidoDTO.PedidoResponseDTO;
 import com.agi.hack.dto.SetorDTO.SetorResponseDTO;
 import com.agi.hack.enums.CategoriaEquipamento;
-import com.agi.hack.enums.ClassificacaoEquipamento;
 import com.agi.hack.enums.ListaEquipamento;
 import com.agi.hack.enums.StatusEquipamento;
 import com.agi.hack.model.Manutencao;
-import com.agi.hack.model.Pedido;
-import com.agi.hack.model.Setor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 
@@ -22,17 +17,15 @@ public class EquipamentoResponseDTO {
 
     private Long idEquipamento;
 
-    private ListaEquipamento nome;
+    private String nome;
 
     private Double custoAquisicao;
 
     private LocalDateTime dataAquisicao;
 
-    private Long numeroSerie;
+    private String numeroSerie;
 
     private StatusEquipamento status;
-
-    private ClassificacaoEquipamento classificacaoEquipamento;
 
     private CategoriaEquipamento categoriaEquipamento;
 
