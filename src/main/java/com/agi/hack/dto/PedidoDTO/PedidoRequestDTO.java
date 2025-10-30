@@ -2,6 +2,7 @@ package com.agi.hack.dto.PedidoDTO;
 
 import java.time.LocalDateTime;
 
+import com.agi.hack.enums.StatusPedido;
 import com.agi.hack.model.Equipamento;
 
 public class PedidoRequestDTO {
@@ -9,20 +10,19 @@ public class PedidoRequestDTO {
     // private Long idPedido;
     private LocalDateTime dataPedido;
     private LocalDateTime dataPrevisao;
-    private String tipo;
     private String status;
-    private Equipamento equipamento;
+    private Long catalogoId;
+    private Integer quantidade;
 
     public PedidoRequestDTO() {
     }
 
-    public PedidoRequestDTO(LocalDateTime dataPedido, LocalDateTime dataPrevisao, String tipo, String status,
-            Equipamento equipamento) {
+    public PedidoRequestDTO(LocalDateTime dataPedido, LocalDateTime dataPrevisao, String status, Long catalogoId, Integer quantidade) {
         this.dataPedido = dataPedido;
         this.dataPrevisao = dataPrevisao;
-        this.tipo = tipo;
         this.status = status;
-        this.equipamento = equipamento;
+        this.catalogoId = catalogoId;
+        this.quantidade = quantidade;
     }
 
     public LocalDateTime getDataPedido() {
@@ -41,13 +41,6 @@ public class PedidoRequestDTO {
         this.dataPrevisao = dataPrevisao;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
 
     public String getStatus() {
         return status;
@@ -57,12 +50,21 @@ public class PedidoRequestDTO {
         this.status = status;
     }
 
-    public Equipamento getEquipamento() {
-        return equipamento;
+
+    public Long getCatalogoId() {
+        return catalogoId;
     }
 
-    public void setEquipamento(Equipamento equipamento) {
-        this.equipamento = equipamento;
+    public void setCatalogoId(Long catalogoId) {
+        this.catalogoId = catalogoId;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
 }

@@ -33,7 +33,7 @@ public class EquipamentoResponseDTO {
 
     private SetorResponseDTO setor;
 
-    private PedidoResponseDTO pedido;
+    private String catalogoDescricao;
 
     private FuncionarioResponseDTO funcionario;
 

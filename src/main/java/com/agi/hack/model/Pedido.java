@@ -4,23 +4,16 @@ import java.time.LocalDateTime;
 
 import com.agi.hack.enums.ListaEquipamento;
 import com.agi.hack.enums.StatusPedido;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 // IMPORT CORRIGIDO
-import com.agi.hack.model.Equipamento;
+
 
 @Entity
 @Table(name = "pedidos")
+@NoArgsConstructor
 public class Pedido {
 
     @Id
@@ -31,29 +24,30 @@ public class Pedido {
 
     private LocalDateTime dataPrevisao;
 
-    @Enumerated(EnumType.STRING)
-    private ListaEquipamento tipo;
+    @Column(nullable = false)
+    private Integer quantidade;
 
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
-    // MAPEAMENTO CORRIGIDO: Deve ser "pedido" para corresponder ao campo em Equipamento.java
-    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Equipamento equipamento;
 
-    public Pedido() {
+    public Pedido(Catalogo itemSolicitado) {
+        this.itemSolicitado = itemSolicitado;
     }
 
-    public Pedido(Long idPedido, LocalDateTime dataPedido, LocalDateTime dataPrevisao, ListaEquipamento tipo,
-                  StatusPedido status, Equipamento equipamento) {
+    public Pedido(Long idPedido, LocalDateTime dataPedido, LocalDateTime dataPrevisao,
+                  StatusPedido status, Catalogo itemSolicitado, Integer quantidade) {
         this.idPedido = idPedido;
         this.dataPedido = dataPedido;
         this.dataPrevisao = dataPrevisao;
-        this.tipo = tipo;
         this.status = status;
-        this.equipamento = equipamento;
+        this.itemSolicitado = itemSolicitado;
+        this.quantidade = quantidade;
     }
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idCatalogo")
+    private Catalogo itemSolicitado;
 
     public Long getIdPedido() {
         return idPedido;
@@ -79,14 +73,6 @@ public class Pedido {
         this.dataPrevisao = dataPrevisao;
     }
 
-    public ListaEquipamento getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(ListaEquipamento tipo) {
-        this.tipo = tipo;
-    }
-
     public StatusPedido getStatus() {
         return status;
     }
@@ -95,12 +81,20 @@ public class Pedido {
         this.status = status;
     }
 
-    public Equipamento getEquipamento() {
-        return equipamento;
+
+    public Catalogo getItemSolicitado() {
+        return itemSolicitado;
     }
 
-    public void setEquipamento(Equipamento equipamento) {
-        this.equipamento = equipamento;
+    public void setItemSolicitado(Catalogo itemSolicitado) {
+        this.itemSolicitado = itemSolicitado;
     }
 
+    public Integer getQuantidade(){
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade){
+        this.quantidade = quantidade;
+    }
 }

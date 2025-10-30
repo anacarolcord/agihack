@@ -15,6 +15,7 @@ public interface PedidoMapper {
     // RequestDTO → Entidade
     // CORREÇÃO: Adicionando @Mapping para ignorar o ID (que é gerado no banco)
     @Mapping(target = "idPedido", ignore = true)
+    @Mapping(target = "itemSolicitado", ignore = true)
     Pedido toEntity(PedidoRequestDTO dto);
 
     // Entidade → ResponseDTO

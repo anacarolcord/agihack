@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EquipamentoRequestDTO {
-    private String nome;
 
     private Double custoAquisicao;
 
@@ -33,7 +32,7 @@ public class EquipamentoRequestDTO {
 
     private Setor setor;
 
-    private Pedido pedido;
-
     private Funcionario funcionario;
+
+    private Long catalogoId;
 }
