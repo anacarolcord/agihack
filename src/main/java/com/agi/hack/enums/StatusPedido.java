@@ -5,6 +5,7 @@ public enum StatusPedido {
     PENDENTE,
     APROVADO,
     CANCELADO,
-    CONCLUIDO
+    CONCLUIDO,
+    ABERTO_AUTOMATICO
 
 }

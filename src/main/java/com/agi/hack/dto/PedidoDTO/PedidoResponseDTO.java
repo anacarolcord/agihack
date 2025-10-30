@@ -10,21 +10,21 @@ public class PedidoResponseDTO {
     private Long idPedido;
     private LocalDateTime dataPedido;
     private LocalDateTime dataPrevisao;
-    private String tipo;
-    private StatusPedido status;
-    private Equipamento equipamento;
+    private String status;
+    private String catalogoDescricao; // <-- ADICIONADO (Ex: "Notebook Dell")
+    private Integer quantidade;
 
     public PedidoResponseDTO() {
     }
 
-    public PedidoResponseDTO(Long idPedido, LocalDateTime dataPedido, LocalDateTime dataPrevisao, String tipo,
-            StatusPedido status, Equipamento equipamento) {
+    public PedidoResponseDTO(Long idPedido, LocalDateTime dataPedido, LocalDateTime dataPrevisao,
+                             String status, String catalogoDescricao, Integer quantidade) {
         this.idPedido = idPedido;
         this.dataPedido = dataPedido;
         this.dataPrevisao = dataPrevisao;
-        this.tipo = tipo;
         this.status = status;
-        this.equipamento = equipamento;
+        this.catalogoDescricao = catalogoDescricao;
+        this.quantidade = quantidade;
     }
 
     public Long getIdPedido() {
@@ -51,28 +51,14 @@ public class PedidoResponseDTO {
         this.dataPrevisao = dataPrevisao;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public StatusPedido getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(StatusPedido status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Equipamento getEquipamento() {
-        return equipamento;
-    }
-
-    public void setEquipamento(Equipamento equipamento) {
-        this.equipamento = equipamento;
-    }
 
 }

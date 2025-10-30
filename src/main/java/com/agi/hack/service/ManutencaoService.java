@@ -100,13 +100,13 @@ public class ManutencaoService {
         manutencao.setEquipamento(equipamento);
         manutencao.setFuncionario(equipamento.getFuncionario());
         manutencao.setSerialNumber(equipamento.getNumeroSerie());
-        manutencao.setTipoEquipamento(ListaEquipamento.valueOf(equipamento.getNome()));
+        manutencao.setTipoEquipamento(ListaEquipamento.valueOf(equipamento.getCatalogo().getCategoria().toUpperCase()));
         manutencao.setStatusManutencao(request.getStatusManutencao() != null ? request.getStatusManutencao() : StatusManutencao.PENDENTE);
         manutencao.setDataEntrada(LocalDate.now());
 
         // calcular dataPrevista
         try {
-            ListaEquipamento tipoEnum = ListaEquipamento.valueOf(String.valueOf(equipamento.getNome()));
+            ListaEquipamento tipoEnum = ListaEquipamento.valueOf(String.valueOf(equipamento.getCatalogo().getCategoria().toUpperCase()));
             manutencao.setDataPrevista(LocalDate.now().plusDays(tipoEnum.getDiasManutencao()));
         } catch (Exception e) {
             manutencao.setDataPrevista(LocalDate.now().plusDays(7));
@@ -134,11 +134,11 @@ public class ManutencaoService {
             }
             manutencao.setEquipamento(equipamento);
             manutencao.setSerialNumber(equipamento.getNumeroSerie());
-            manutencao.setTipoEquipamento(ListaEquipamento.valueOf(equipamento.getNome()));
+            manutencao.setTipoEquipamento(ListaEquipamento.valueOf(equipamento.getCatalogo().getCategoria().toUpperCase()));
             manutencao.setFuncionario(equipamento.getFuncionario());
 
             try {
-                ListaEquipamento tipoEnum = ListaEquipamento.valueOf(String.valueOf(equipamento.getNome()));
+                ListaEquipamento tipoEnum = ListaEquipamento.valueOf(String.valueOf(equipamento.getCatalogo().getCategoria().toUpperCase()));
                 manutencao.setDataPrevista(LocalDate.now().plusDays(tipoEnum.getDiasManutencao()));
             } catch (Exception e) {
                 manutencao.setDataPrevista(LocalDate.now().plusDays(7));

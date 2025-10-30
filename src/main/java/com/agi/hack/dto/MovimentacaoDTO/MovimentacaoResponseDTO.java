@@ -40,7 +40,7 @@ public class MovimentacaoResponseDTO {
 
         if (movimentacao.getEquipamento() != null) {
             this.equipamentoId = movimentacao.getEquipamento().getIdEquipamento();
-            this.nomeEquipamento = movimentacao.getEquipamento().getNome();
+            this.nomeEquipamento = movimentacao.getEquipamento().getCatalogo().getDescricao();
         }
 
 
